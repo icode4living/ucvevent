@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Cyber Vision - End of Year Team Hangout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Hedvig+Letters+Sans&family=Quattrocento+Sans:wght@400;700&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0C10;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: 'Quattrocento Sans', sans-serif;
+            color: #D8DDE4;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #B7945B;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, #12141C 0%, #1A1E2A 100%);
+            border-radius: 24px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(183, 148, 91, 0.1);
+        }
+
+        /* Elegant light overlay effect */
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(183, 148, 91, 0.03) 0%,
+                transparent 60%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Decorative corner lines */
+        .corner-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #B7945B;
+            opacity: 0.3;
+            z-index: 3;
+        }
+
+        .corner-decoration.top-left {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
+        /* Header section */
+        .header {
+            padding: 60px 50px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .event-type {
+            font-family: 'Hedvig Letters Sans', sans-serif;
+            font-size: 14px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #B7945B;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .event-type::before,
+        .event-type::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #B7945B, transparent);
+        }
+
+        .event-type::before { left: -60px; }
+        .event-type::after { right: -60px; }
+
+        .event-title {
+            font-family: 'Oranienbaum', serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #E0E2E8 0%, #B7945B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .event-theme {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: #5B6B8A;
+            margin-bottom: 30px;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #D8DDE4;
+        }
+
+        .meta-icon {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(183, 148, 91, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #B7945B;
+            font-size: 14px;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 50px;
+            gap: 20px;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(183, 148, 91, 0.3), transparent);
+        }
+
+        .divider-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(183, 148, 91, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #B7945B;
+            font-size: 16px;
+        }
+
+        /* Program section */
+        .program-section {
+            padding: 20px 50px 50px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            font-family: 'Hedvig Letters Sans', sans-serif;
+            font-size: 16px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #B7945B;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Program items */
+        .program-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .program-number {
+            font-family: 'Oranienbaum', serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: rgba(183, 148, 91, 0.2);
+            line-height: 1;
+            min-width: 60px;
+        }
+
+        .program-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+
+        .program-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .program-title {
+            font-family: 'Hedvig Letters Sans', sans-serif;
+            font-size: 18px;
+            color: #E0E2E8;
+            letter-spacing: 1px;
+        }
+
+        .program-duration {
+            font-size: 13px;
+            color: #B7945B;
+            font-weight: 600;
+            background: rgba(183, 148, 91, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(183, 148, 91, 0.2);
+        }
+
+        .program-description {
+            font-size: 15px;
+            color: #5B6B8A;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .program-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .highlight-tag {
+            font-size: 12px;
+            color: #D8DDE4;
+            background: rgba(91, 107, 138, 0.15);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(91, 107, 138, 0.2);
+        }
+
+        /* Decorative line connector */
+        .program-item::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 60px;
+            bottom: -30px;
+            width: 1px;
+            background: linear-gradient(180deg, rgba(183, 148, 91, 0.3), transparent);
+        }
+
+        .program-item:last-child::before {
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 50px;
+            text-align: center;
+            border-top: 1px solid rgba(183, 148, 91, 0.1);
+            position: relative;
+            z-index: 5;
+        }
+
+        .closing-message {
+            font-family: 'Sorts Mill Goudy', serif;
+            font-size: 18px;
+            color: #E0E2E8;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .closing-signature {
+            font-size: 14px;
+            color: #B7945B;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .event-title {
+                font-size: 36px;
+            }
+            
+            .event-meta {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header {
+                padding: 40px 30px 30px;
+            }
+            
+            .program-section {
+                padding: 20px 30px 40px;
+            }
+            
+            .program-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .program-number {
+                font-size: 36px;
+                min-width: auto;
+            }
+            
+            .program-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .event-title {
+                font-size: 28px;
+            }
+            
+            .event-theme {
+                font-size: 18px;
+            }
+            
+            .header {
+                padding: 30px 20px 25px;
+            }
+            
+            .program-section {
+                padding: 15px 20px 30px;
+            }
+            
+            .footer {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="background-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
+
+    <div class="event-card">
+        <!-- Decorative corner lines -->
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="event-type">End of Year Celebration</div>
+            <h1 class="event-title">Ultimate Cyber Vision</h1>
+            <p class="event-theme">Gratitude • Reflection • Closure</p>
+            <div class="event-meta">
+                <div class="meta-item">
+                    <div class="meta-icon">◷</div>
+                    <span>60-75 Minutes</span>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon">☕</div>
+                    <span> Chill</span>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon">✨</div>
+                    <span>Team Hangout</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Divider -->
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon">§</div>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- Program Section -->
+        <section class="program-section">
+            <h2 class="section-title">Program of Events</h2>
+
+            <div class="program-item">
+                <div class="program-number">01</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Arrival & Settle In</h3>
+                        <span class="program-duration">10 Minutes</span>
+                    </div>
+                    <p class="program-description">Welcome and casual mingling as team members arrive</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Light music</span>
+                        <span class="highlight-tag">Food & drinks</span>
+                        <span class="highlight-tag">Casual conversations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">02</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Opening Moment</h3>
+                        <span class="program-duration">3 Minutes</span>
+                    </div>
+                    <p class="program-description">A moment of reflection and gratitude for the year</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Short prayer</span>
+                        <span class="highlight-tag">Gratitude reflection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">03</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Founder's Address</h3>
+                        <span class="program-duration">5 Minutes</span>
+                    </div>
+                    <p class="program-description">Words of appreciation and reflection on the journey</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Year in review</span>
+                        <span class="highlight-tag">Future outlook</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">04</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Team Appreciation Round</h3>
+                        <span class="program-duration">10 Minutes</span>
+                    </div>
+                    <p class="program-description">Voluntary sharing of appreciation and lessons learned</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Voluntary sharing</span>
+                        <span class="highlight-tag">Respectful contributions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">05</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Eat, Chill & Connect</h3>
+                        <span class="program-duration">20 Minutes</span>
+                    </div>
+                    <p class="program-description">A relaxed time for food and meaningful conversations</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Proper eating</span>
+                        <span class="highlight-tag">Free conversations</span>
+                        <span class="highlight-tag">Background music</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">06</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Simple Recognition</h3>
+                        <span class="program-duration">5 Minutes</span>
+                    </div>
+                    <p class="program-description">Acknowledging consistency and effort throughout the year</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Verbal appreciation</span>
+                        <span class="highlight-tag">Applause</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">07</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Looking Ahead</h3>
+                        <span class="program-duration">5 Minutes</span>
+                    </div>
+                    <p class="program-description">Setting intentions and focus for the upcoming year</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">One thing to improve</span>
+                        <span class="highlight-tag">One thing to stop</span>
+                        <span class="highlight-tag">One focus going forward</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">08</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Toast & Closing</h3>
+                        <span class="program-duration">3 Minutes</span>
+                    </div>
+                    <p class="program-description">Celebrating growth and closing the formal program</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Toast to growth</span>
+                        <span class="highlight-tag">Group photo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-item">
+                <div class="program-number">09</div>
+                <div class="program-content">
+                    <div class="program-header">
+                        <h3 class="program-title">Free Exit</h3>
+                        <span class="program-duration">Open</span>
+                    </div>
+                    <p class="program-description">Informal wrap-up and continued conversations</p>
+                    <div class="program-highlights">
+                        <span class="highlight-tag">Music</span>
+                        <span class="highlight-tag">Informal wrap-up</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="closing-message">"Thank you for being part of this journey.<br>We move forward — one step at a time."</p>
+            <p class="closing-signature">Ultimate Cyber Vision Team</p>
+        </footer>
+    </div>
+</body>
+</html>
