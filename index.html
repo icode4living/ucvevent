@@ -200,6 +200,39 @@
             font-size: 14px;
         }
 
+        /* Founder Speech Button */
+        .founder-speech-btn {
+            margin-top: 30px;
+            display: inline-block;
+        }
+
+        .speech-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(183, 148, 91, 0.1);
+            border: 1px solid rgba(183, 148, 91, 0.3);
+            border-radius: 12px;
+            color: #B7945B;
+            text-decoration: none;
+            font-family: 'Hedvig Letters Sans', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .speech-link:hover {
+            background: rgba(183, 148, 91, 0.2);
+            border-color: rgba(183, 148, 91, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(183, 148, 91, 0.1);
+        }
+
+        .speech-link .icon {
+            font-size: 16px;
+        }
+
         /* Divider */
         .divider {
             display: flex;
@@ -314,6 +347,31 @@
             border: 1px solid rgba(91, 107, 138, 0.2);
         }
 
+        /* Speech PDF link in program item */
+        .speech-pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: rgba(183, 148, 91, 0.1);
+            border: 1px solid rgba(183, 148, 91, 0.3);
+            border-radius: 8px;
+            color: #B7945B;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .speech-pdf-link:hover {
+            background: rgba(183, 148, 91, 0.2);
+            border-color: rgba(183, 148, 91, 0.5);
+        }
+
+        .speech-pdf-link .icon {
+            font-size: 12px;
+        }
+
         /* Decorative line connector */
         .program-item::before {
             content: '';
@@ -414,6 +472,11 @@
             .footer {
                 padding: 30px 20px;
             }
+            
+            .speech-link {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
@@ -443,7 +506,7 @@
             <div class="event-type">End of Year Celebration</div>
             <h1 class="event-title">Ultimate Cyber Vision</h1>
             <p class="event-theme">December 2025</p>
-<p class="event-theme">Gratitude • Reflection • Closure</p>
+            <p class="event-theme">Gratitude • Reflection • Closure</p>
             <div class="event-meta">
                 <div class="meta-item">
                     <div class="meta-icon">◷</div>
@@ -457,6 +520,14 @@
                     <div class="meta-icon">✨</div>
                     <span>Team Hangout</span>
                 </div>
+            </div>
+            
+            <!-- Founder Speech Button -->
+            <div class="founder-speech-btn">
+                <a href="speech.pdf" class="speech-link" target="_blank">
+                    <span class="icon">📄</span>
+                    <span>Founder's Full Speech (PDF)</span>
+                </a>
             </div>
         </header>
 
@@ -514,6 +585,11 @@
                         <span class="highlight-tag">Year in review</span>
                         <span class="highlight-tag">Future outlook</span>
                     </div>
+                    <!-- Speech PDF link inside program item -->
+                    <a href="speech.pdf" class="speech-pdf-link" target="_blank">
+                        <span class="icon">📄</span>
+                        <span>View full speech (PDF)</span>
+                    </a>
                 </div>
             </div>
 
